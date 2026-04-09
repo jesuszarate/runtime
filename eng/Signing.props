@@ -49,9 +49,9 @@
     <MacOSPkg Include="$(ArtifactsPackagesDir)**/dotnet-runtime*.pkg" Exclude="$(ArtifactsPackagesDir)**/dotnet-runtime-internal*.pkg" />
     <FileSignInfo Include="@(MacOSPkg->'%(Filename)%(Extension)')" CertificateName="MacDeveloperWithNotarization" />
 
-    <!-- We don't need to code sign .js files because they are not used in Windows Script Host. -->
-    <!-- WARNING: Needs to happed outside of any target -->
-    <FileExtensionSignInfo Update=".js" CertificateName="None" />
+    <!-- Sign .js files with Microsoft400 for VS signing compliance (workload MSI packs). -->
+    <!-- WARNING: Needs to happen outside of any target -->
+    <FileExtensionSignInfo Update=".js" CertificateName="Microsoft400" />
 
     <!-- Third-party components which should be signed.  -->
     <FileSignInfo Include="Antlr4.Runtime.Standard.dll" CertificateName="3PartySHA2" />
